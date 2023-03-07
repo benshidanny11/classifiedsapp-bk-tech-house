@@ -9,13 +9,11 @@ const UserController = {
     const {
      email, password
     } = req.body;
-    const userData = { email, password };
-
     const userResurt = await User.findOne({
       where: { email },
       attributes: ["id","name", "email", "password"],
     });
-    const user = userResurt.dataValues;
+    const user = userResurt?.dataValues;
     if (!user) {
       return req.sendStatus(404);
     } else {
