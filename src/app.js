@@ -12,7 +12,7 @@ const { sequelize: dbCon } = db;
 const PORT = process.env.PORT || 8080;
 app.use(cors(corsOptions));
 app.use(express.json());
-app.use('/', api)
+app.use('/api', api)
 
 
 app.get("/", (req, res) => {

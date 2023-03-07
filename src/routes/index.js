@@ -1,12 +1,11 @@
-import 'regenerator-runtime';
-import express from 'express';
-import User from './_user';
-import Pharmacy from './_pharmacy';
+const express =require('express');
+const User =require ('./_user');
+const Product =require ('./_product');
 
 const api = express();
 
 api.use('/user', User);
-api.use('/pharmacy', Pharmacy);
+api.use('/product', Product);
 api.get('/', (req, res) => {
   res.status(200).send({
     status: 200,
@@ -20,4 +19,4 @@ api.use('/', (req, res) => {
   });
 });
 
-export default api;
+module.exports= api;
