@@ -36,7 +36,7 @@ module.exports = {
         type: Sequelize.DATE
       },
       uid: {
-        type: Sequelize.STRING,
+        type: Sequelize.INTEGER,
         onUpdate: 'CASCADE',
         onDelete: 'CASCADE',
         references: {
