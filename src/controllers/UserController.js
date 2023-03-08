@@ -15,15 +15,13 @@ const UserController = {
     });
     const user = userResurt?.dataValues;
     if (!user) {
-      return req.sendStatus(404);
+      return res.status(401).json({  message: "Incorect email", });
     } else {
       if (bcrypt.compareSync(password, user.password)) {
         let token = await generateAccessToken({name: user.name, email:user.email});
         return res.json({ token });
       } else {
-        return {
-          message: "password is incorrect",
-        };
+        return res.status(401).json({  message: "password is incorrect", });
       }
     }
   },
