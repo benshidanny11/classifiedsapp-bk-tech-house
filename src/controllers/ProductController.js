@@ -26,7 +26,6 @@ const ProductController = {
   },
   getUserProducts: async (req, res) => {
     const { user } = req;
-    console.log(user);
     const products = await Product.findAll({
       where: { uid: user.id },
       limit: 10,
@@ -35,7 +34,7 @@ const ProductController = {
   },
   updateProduct: async (req, res) => {
     const { id } = req.params;
-    const { body } = req;
+    const { body, user } = req;
     if (!isANumber(id)) {
       return res.sendStatus(400);
     }
@@ -47,7 +46,10 @@ const ProductController = {
         category: body.category,
         manufacture_date: body.manufaturedate,
       };
-
+      let productUser = await Product.findOne({ where: { id } });
+      if(productUser && productUser.dataValues.uid!=user.id){
+        return res.sendStatus(403);
+      }
     const product = await Product.update(data,{ where: { id } });
     if (!product) {
       return res.sendStatus(400);
